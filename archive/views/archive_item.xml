@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Data records go here -->
+    <record id='archive_item_action' model='ir.actions.act_window'>
+        <field name="name">Archive Items</field>
+        <field name="res_model">archive.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        name="Archive"
+        id="archive_base_menu" />
+
+    <menuitem 
+        name="Items"
+        id="archive_item_menu"
+        parent="archive_base_menu"
+        action="archive_item_action" />
+
+    <record id="archive_item_view_form" model="ir.ui.view">
+        <field name="name">Archive item Form</field>
+        <field name="model">archive.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="author_ids"
+                        widget="many2many_tags"/>
+                        <field name="tags"
+                        widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="date_release"/>
+                        <field name="date_creation"/>                                              
+                    </group>
+                </group>
+                <group>
+                    <field name="description"/>
+                    <field name="attachment" filename="attachment_name"/>
+                    <field name="attachment_name" invisible="1"/>
+                    <field name="date_updated"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="archive_item_view_tree" model="ir.ui.view">
+        <field name="name">Archive item List</field>
+        <field name="model">archive.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="tags"
+                widget="many2many_tags"/>
+                <field name="description"/>
+                <field name="date_release"/>
+                <field name="date_creation"/>
+                <field name="date_updated"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="archive_item_view_search" model="ir.ui.view">
+        <field name="name">Archive item Search</field>
+        <field name="model">archive.item</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="tags"
+                widget="many2many_tags"/>
+                <field name="author_ids"/>
+                <filter string="No Authors"
+                    name="without_author"
+                    domain="[('author_ids','=',False)]"/>
+                <field name="description"/>
+                <field name="date_release"/>
+                <field name="date_creation"/>
+                <field name="date_updated"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

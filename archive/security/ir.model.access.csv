@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acl_item,archive.item default,model_archive_item,,1,0,0,0
+acl_item_archivist,archive.item_archivist,model_archive_item,group_archivist,1,1,1,1
+acl_tag,archive.tag default,model_archive_tag,,1,0,0,0
+acl_tag_archivist,archive.tag_archivist,model_archive_tag,group_archivist,1,1,1,1
