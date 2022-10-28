@@ -4,7 +4,7 @@
     <record id='archive_item_action' model='ir.actions.act_window'>
         <field name="name">Archive Items</field>
         <field name="res_model">archive.item</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
     </record>
 
     <menuitem
@@ -22,25 +22,28 @@
         <field name="model">archive.item</field>
         <field name="arch" type="xml">
             <form>
-                <group>
+                <header>
+                    
+                </header>
                     <group>
-                        <field name="name"/>
-                        <field name="author_ids"
-                        widget="many2many_tags"/>
-                        <field name="tags"
-                        widget="many2many_tags"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="author_ids"
+                            widget="many2many_tags"/>
+                            <field name="tags"
+                            widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="date_release"/>
+                            <field name="date_creation"/>                                              
+                        </group>
                     </group>
                     <group>
-                        <field name="date_release"/>
-                        <field name="date_creation"/>                                              
+                        <field name="description"/>
+                        <field name="attachment" filename="attachment_name"/>
+                        <field name="attachment_name" invisible="1"/>
+                        <field name="date_updated"/>
                     </group>
-                </group>
-                <group>
-                    <field name="description"/>
-                    <field name="attachment" filename="attachment_name"/>
-                    <field name="attachment_name" invisible="1"/>
-                    <field name="date_updated"/>
-                </group>
             </form>
         </field>
     </record>
@@ -61,6 +64,44 @@
         </field>
     </record>
 
+    <record id="archive_item_view_kanban" model="ir.ui.view">
+        <field name="name">Archive item Kanban</field>
+        <field name="model">archive.item</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="tags"/>
+                <field name="date_release"/>
+                <field name="date_updated"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                            </div>
+                            <div>    
+                                Released: <field name="date_release"/>
+                            </div>
+                            <div class="text-muted">
+                                Updated: <field name="date_updated"/>
+                            </div> 
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">                                                                                                
+                                </div>                                   
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="tags" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
     <record id="archive_item_view_search" model="ir.ui.view">
         <field name="name">Archive item Search</field>
         <field name="model">archive.item</field>
@@ -78,6 +119,28 @@
                 <field name="date_creation"/>
                 <field name="date_updated"/>
             </search>
+        </field>
+    </record>
+
+    <record id='archive_tag_action' model='ir.actions.act_window'>
+        <field name="name">Tags</field>
+        <field name="res_model">archive.tag</field>
+        <field name="view_mode">tree</field>
+    </record>
+    
+    <menuitem 
+        name="Tags"
+        id="archive_tag_menu"
+        parent="archive_base_menu"
+        action="archive_tag_action" />
+    
+    <record id="archive_tag_view_tree" model="ir.ui.view">
+        <field name="name">Archive Tag List</field>
+        <field name="model">archive.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
         </field>
     </record>
 

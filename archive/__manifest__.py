@@ -8,7 +8,7 @@
     'author': "Corvo Larida",
     'website': "https://github.com/CorvoLarida/odoo_module_archive",
     'category': 'Knowledge Management',
-    'version': '13.0.1.0.0',
+    'version': '13.0.2.0.0',
     'license': 'LGPL-3',
     'sequence': -50,
     'application':True,

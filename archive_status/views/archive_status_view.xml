@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="archive_item_view_form_inherit_status" model="ir.ui.view">
+      <field name="name">archive.item.view.form.inherit.status</field>
+      <field name="model">archive.item</field>
+      <field name="inherit_id" ref="archive.archive_item_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//form//header" position="inside">
+          <field name="state" widget="statusbar" options="{'clickable':'1'}" />
+        </xpath>
+      </field>
+    </record>
+    
+    <record id="archive_item_view_kanban_inherit_status" model="ir.ui.view">
+      <field name="name">archive.item.view.kanban.inherit.status</field>
+      <field name="model">archive.item</field>
+      <field name="inherit_id" ref="archive.archive_item_view_kanban"/>
+      <field name="arch" type="xml">
+        <xpath expr="//kanban//templates//t//div//div[1]" position="inside" >
+          <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'editing': 'warning', 'done': 'success'}}"/>
+        </xpath>
+      </field>
+    </record>
+      
+  </data>
+</odoo>
